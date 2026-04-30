@@ -1,0 +1,13 @@
+/* TEMPORARY DEBUG: Force Search Bar to be Red to test if the CSS selector works! */
+.body-sidebar .standard-sidebar-item[data-item-name="Search"] > .item-anchor,
+.body-sidebar .standard-sidebar-item[data-label="Search"] > .item-anchor,
+.body-sidebar .standard-sidebar-item[item-name="Search"] > .item-anchor,
+.body-sidebar .sidebar-item-container[data-label="Search"] .item-anchor,
+.body-sidebar .sidebar-item-container[item-name="Search"] .item-anchor,
+.body-sidebar .sidebar-item-container[item-icon="search"] .item-anchor,
+.body-sidebar .sidebar-search,
+.body-sidebar .search-bar,
+.body-sidebar [class*="search"] input {
+    background-color: #ff0303 !important;
+    box-shadow: 0 0 10px rgba(255, 3, 3, 0.8) !important;
+}
