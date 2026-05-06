@@ -40,3 +40,17 @@ def get_sidebar_item_theme():
         return doc.as_dict()
     except Exception:
         return {}
+
+
+@frappe.whitelist()
+def get_portal_sidebar_theme():
+    """
+    Returns all Portal Sidebar Theme settings as a dict.
+    Used by portal_sidebar_theme.js to dynamically apply CSS.
+    """
+    try:
+        doc = frappe.get_single("Portal Sidebar Theme")
+        return doc.as_dict()
+    except Exception:
+        return {}
+
