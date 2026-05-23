@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2026-04-25 11:00:00.000000",
+ "creation": "2026-04-25 11:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -9,13 +9,11 @@
   "enable_sidebar_theme",
   "column_break_gen1",
   "sidebar_width",
+  "font_weight_section",
   "column_break_gen2",
   "sidebar_font_family",
-  "column_break_gen3",
-  "sidebar_font_size",
-  "font_weight_section",
+  "column_break_awvl",
   "sidebar_font_weight",
-
   "background_tab",
   "bg_section",
   "use_gradient",
@@ -25,7 +23,6 @@
   "bg_gradient_end",
   "column_break_bg2",
   "bg_gradient_direction",
-
   "logo_tab",
   "logo_section",
   "logo_image",
@@ -47,7 +44,6 @@
   "show_dropdown_chevron",
   "column_break_logo_icon2",
   "dropdown_chevron_color",
-
   "search_tab",
   "search_section",
   "search_bg_color",
@@ -67,7 +63,6 @@
   "search_focus_border_color",
   "search_box_shadow",
   "search_hover_box_shadow",
-
   "menu_tab",
   "menu_section",
   "item_text_color",
@@ -97,7 +92,6 @@
   "column_break_hover1",
   "hover_icon_color",
   "hover_transition",
-
   "notification_tab",
   "notification_section",
   "notification_text_color",
@@ -105,7 +99,6 @@
   "column_break_notif1",
   "notification_badge_bg",
   "notification_badge_text",
-
   "border_tab",
   "border_section",
   "sidebar_border_right_color",
@@ -115,7 +108,6 @@
   "divider_width",
   "column_break_border2",
   "show_dividers",
-
   "scrollbar_tab",
   "scrollbar_section",
   "scrollbar_color",
@@ -151,20 +143,10 @@
    "fieldtype": "Column Break"
   },
   {
-   "default": "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
    "fieldname": "sidebar_font_family",
-   "fieldtype": "Data",
-   "label": "Font Family"
-  },
-  {
-   "fieldname": "column_break_gen3",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "13",
-   "fieldname": "sidebar_font_size",
-   "fieldtype": "Int",
-   "label": "Font Size (px)"
+   "fieldtype": "Link",
+   "label": "Font",
+   "options": "Font"
   },
   {
    "fieldname": "font_weight_section",
@@ -176,7 +158,6 @@
    "fieldtype": "Data",
    "label": "Font Weight"
   },
-
   {
    "fieldname": "background_tab",
    "fieldtype": "Tab Break",
@@ -195,10 +176,10 @@
   },
   {
    "default": "#0a0e2a",
+   "depends_on": "eval:!doc.use_gradient",
    "fieldname": "bg_color",
    "fieldtype": "Color",
-   "label": "Background Color",
-   "depends_on": "eval:!doc.use_gradient"
+   "label": "Background Color"
   },
   {
    "fieldname": "column_break_bg1",
@@ -206,17 +187,17 @@
   },
   {
    "default": "#0a0e2a",
+   "depends_on": "eval:doc.use_gradient",
    "fieldname": "bg_gradient_start",
    "fieldtype": "Color",
-   "label": "Gradient Start Color",
-   "depends_on": "eval:doc.use_gradient"
+   "label": "Gradient Start Color"
   },
   {
    "default": "#141a3a",
+   "depends_on": "eval:doc.use_gradient",
    "fieldname": "bg_gradient_end",
    "fieldtype": "Color",
-   "label": "Gradient End Color",
-   "depends_on": "eval:doc.use_gradient"
+   "label": "Gradient End Color"
   },
   {
    "fieldname": "column_break_bg2",
@@ -224,13 +205,12 @@
   },
   {
    "default": "to bottom",
+   "depends_on": "eval:doc.use_gradient",
    "fieldname": "bg_gradient_direction",
    "fieldtype": "Select",
    "label": "Gradient Direction",
-   "options": "to bottom\nto top\nto right\nto left\nto bottom right\nto bottom left\nto top right\nto top left",
-   "depends_on": "eval:doc.use_gradient"
+   "options": "to bottom\nto top\nto right\nto left\nto bottom right\nto bottom left\nto top right\nto top left"
   },
-
   {
    "fieldname": "logo_tab",
    "fieldtype": "Tab Break",
@@ -344,7 +324,6 @@
    "fieldtype": "Color",
    "label": "Dropdown Chevron Color"
   },
-
   {
    "fieldname": "search_tab",
    "fieldtype": "Tab Break",
@@ -449,7 +428,6 @@
    "fieldtype": "Data",
    "label": "Search Box Shadow (Hover)"
   },
-
   {
    "fieldname": "menu_tab",
    "fieldtype": "Tab Break",
@@ -609,7 +587,6 @@
    "fieldtype": "Data",
    "label": "Hover Transition Duration"
   },
-
   {
    "fieldname": "notification_tab",
    "fieldtype": "Tab Break",
@@ -648,7 +625,6 @@
    "fieldtype": "Color",
    "label": "Badge Text Color"
   },
-
   {
    "fieldname": "border_tab",
    "fieldtype": "Tab Break",
@@ -697,7 +673,6 @@
    "fieldtype": "Check",
    "label": "Show Section Dividers"
   },
-
   {
    "fieldname": "scrollbar_tab",
    "fieldtype": "Tab Break",
@@ -735,13 +710,17 @@
    "fieldname": "scrollbar_border_radius",
    "fieldtype": "Int",
    "label": "Scrollbar Border Radius (px)"
+  },
+  {
+   "fieldname": "column_break_awvl",
+   "fieldtype": "Column Break"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-04-25 11:00:00.000000",
+ "modified": "2026-05-20 17:15:47.778514",
  "modified_by": "Administrator",
  "module": "Portal Theme",
  "name": "Sidebar Theme",

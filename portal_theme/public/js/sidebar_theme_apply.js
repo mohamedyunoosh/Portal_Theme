@@ -36,7 +36,7 @@ function apply_sidebar_theme(s) {
     .body-sidebar {
       background: ${bg} !important;
       width: ${s.sidebar_width}px !important;
-      min-width: ${s.sidebar_width}px !important;
+      min-width: auto !important;
       font-family: ${s.sidebar_font_family} !important;
       font-size: ${s.sidebar_font_size}px !important;
       font-weight: ${s.sidebar_font_weight} !important;

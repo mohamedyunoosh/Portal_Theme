@@ -13,7 +13,7 @@ class SidebarTheme(Document):
 			frappe.throw("Sidebar width cannot be less than 150px")
 		if self.sidebar_width and self.sidebar_width > 400:
 			frappe.throw("Sidebar width cannot be more than 400px")
-		if self.sidebar_font_size and self.sidebar_font_size < 8:
-			frappe.throw("Font size cannot be less than 8px")
-		if self.sidebar_font_size and self.sidebar_font_size > 24:
-			frappe.throw("Font size cannot be more than 24px")
+		if self.item_font_size and self.item_font_size < 8:
+			frappe.throw("Item font size cannot be less than 8px")
+		if self.item_font_size and self.item_font_size > 24:
+			frappe.throw("Item font size cannot be more than 24px")

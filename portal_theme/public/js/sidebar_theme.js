@@ -1,6 +1,12 @@
 /**
  * Sidebar Theme — Dynamic CSS Injector
  * Uses exact Frappe sidebar class names for precise styling.
+ *
+ * COLLAPSE FIX:
+ * Never set min-width on .body-sidebar.
+ * Frappe sets min-width: auto when collapsed — our !important
+ * on min-width was overriding it and blocking collapse.
+ * Only width is needed to size the expanded sidebar.
  */
 (function () {
 	"use strict";
@@ -45,7 +51,7 @@
 
 		// === General ===
 		const W = v(s.sidebar_width, 220);
-		const FF = v(s.sidebar_font_family, "Inter, -apple-system, BlinkMacSystemFont, sans-serif");
+		const FF = `font-family: ${s.sidebar_font_family} !important;`;
 		const FS = v(s.sidebar_font_size, 13);
 		const FW = v(s.sidebar_font_weight, "400");
 
@@ -126,16 +132,26 @@
 
 
 /* ── 1. OUTERMOST CONTAINER ──────────────────── */
+/*
+ * COLLAPSE FIX:
+ * - NO min-width set at all (was blocking collapse)
+ * - NO max-width set at all (not needed)
+ * - Only width is set, scoped to .expanded so Frappe
+ *   can freely change width when collapsing.
+ * Frappe toggles .expanded on .body-sidebar-container.
+ */
 .body-sidebar {
         background: ${bgValue} !important;
-        width: ${W}px !important;
-        min-width: ${W}px !important;
-        max-width: ${W}px !important;
-        font-family: ${FF} !important;
+        ${FF}	
         font-size: ${FS}px !important;
         font-weight: ${FW} !important;
         border-right: ${bRW}px solid ${bRC} !important;
-        transition: background 0.3s ease !important;
+        transition: background 0.3s ease, width 0.3s ease !important;
+}
+
+/* Only set width when expanded — never touch min/max-width */
+.body-sidebar-container.expanded .body-sidebar {
+        width: ${W}px !important;
 }
 
 
@@ -179,7 +195,7 @@
 }
 
 
-/* ── 4. ALL MENU ITEMS — DEFAULT (lowest priority) ── */
+/* ── 4. ALL MENU ITEMS — DEFAULT ──────────────── */
 .body-sidebar .sidebar-item-container .item-anchor {
         padding: ${iPad} !important;
         margin: ${iMar} !important;
@@ -211,7 +227,7 @@
 }
 
 
-/* ── 5. SEARCH ITEM (HIGH specificity) ───────── */
+/* ── 5. SEARCH ITEM ──────────────────────────── */
 .body-sidebar .sidebar-item-container[item-icon="search"] .item-anchor {
         border: 1px solid ${sBdr} !important;
         border-radius: ${sRad}px !important;
@@ -265,11 +281,11 @@
 }
 
 
-/* ── 7. ACTIVE ITEM (HIGHEST specificity) ────── */
+/* ── 7. ACTIVE ITEM ──────────────────────────── */
 /* Handled by Sidebar Item Theme */
 
 
-/* ── 8. HOVER STATE with GLOW ────────────────── */
+/* ── 8. HOVER STATE ──────────────────────────── */
 /* Handled by Sidebar Item Theme */
 
 
