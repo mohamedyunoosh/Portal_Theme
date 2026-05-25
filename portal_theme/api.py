@@ -67,6 +67,73 @@ def _build_portal_theme_css(s):
     parts.append(f"  --body-font: {font_stack};")
     parts.append("}")
 
+    # Background image / color / slider logic
+    bg_css = ""
+    if s.apply_on_login_page:
+        mode = s.apply_image_or_color or "Color"
+        opacity = s.background_opacity or 1.0
+
+        if mode == "Image" and s.background_image:
+            bg_css = f"""
+/* Login Page — Single Background Image */
+.login-content.page-card,
+body.login-page {{
+    background-image: url('{s.background_image}') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    opacity: {opacity} !important;
+}}"""
+        elif mode == "Color" and s.background_color:
+            bg_css = f"""
+/* Login Page — Background Color */
+.login-content.page-card,
+body.login-page {{
+    background-color: {s.background_color} !important;
+    opacity: {opacity} !important;
+}}"""
+        # Slider mode is handled by login_slider.js
+
+    parts.append(bg_css)
+
+    # Global background image (applies to entire desk, not just login)
+    global_bg_css = ""
+    if getattr(s, 'global_background_image', None):
+        opacity = getattr(s, 'global_background_opacity', 1.0) or 1.0
+        global_bg_css = f"""
+html, body {{
+    background-image: url('{s.global_background_image}') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}}
+
+/* Overlay to control opacity without affecting content */
+body::before {{
+    content: '' !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    background-image: url('{s.global_background_image}') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    opacity: {opacity} !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+}}
+
+/* Make containers transparent so image shows through */
+.page-container,
+.layout-main,
+.main-section {{
+    background: transparent !important;
+}}"""
+
     parts.append(f"""
 /* Global Font */
 html, body, input, button, select, textarea,
@@ -75,10 +142,12 @@ html, body, input, button, select, textarea,
     font-family: {font_stack} !important;
 }}
 
-/* Portal Background */
+/* Portal Background Color */
 html, body, .page-container {{
     background-color: var(--portal-bg) !important;
 }}
+
+{global_bg_css}
 
 /* Navbar */
 .navbar {{
@@ -576,6 +645,35 @@ def get_active_theme_css():
 
 def clear_theme_cache(doc=None, method=None):
     frappe.cache().delete_value("active_theme_css")
+
+
+@frappe.whitelist()
+def get_login_background():
+    """Returns login page background config for JS slider."""
+    try:
+        pts = frappe.get_single("Portal Theme Setting")
+        if not pts.enable or not pts.apply_on_login_page:
+            return {}
+
+        mode = pts.apply_image_or_color or "Color"
+        result = {
+            "mode": mode,
+            "opacity": pts.background_opacity or 1.0,
+            "transition": pts.transition or 1.0,
+            "interval": pts.interval or 5.0,
+        }
+
+        if mode == "Image":
+            result["image"] = pts.background_image or ""
+        elif mode == "Color":
+            result["color"] = pts.background_color or ""
+        elif mode == "Slider":
+            result["images"] = [row.image for row in pts.background_images if row.image]
+
+        return result
+    except Exception:
+        frappe.log_error(frappe.get_traceback(), "Login Background Error")
+        return {}
 
 
 @frappe.whitelist()
