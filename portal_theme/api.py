@@ -252,32 +252,60 @@ def _build_sidebar_css(s):
     flex: 0 0 auto !important;
 }}
 
+/* Remove Frappe default gap that causes large spacing between items */
+.body-sidebar .sidebar-items,
+.body-sidebar .standard-items-sections,
+.body-sidebar .sidebar-item-container {{
+    gap: 0 !important;
+    padding: 0 !important;
+}}
+
 
 /* ── 2. LOGO / HEADER ────────────────────────────────────── */
-.sidebar-header {{
+.sidebar-header,
+a.sidebar-header-hover {{
     background: {lbg} !important;
     padding: {lpad} !important;
 }}
 
-.sidebar-header .icon-container,
-.body-sidebar .icon-container {{
-    background: {libg} !important;
+/* Icon badge — the coloured square with initials */
+.sidebar-header .sidebar-item-icon,
+.body-sidebar .sidebar-item-icon[style*="background-color"] {{
+    background-color: {libg} !important;
     color: {litc} !important;
     border-radius: {lir}px !important;
 }}
 
+/* Also override the CSS var Frappe uses for icon bg */
+.body-sidebar {{
+    --sidebar-item-icon-bg: {libg} !important;
+}}
+
+/* Logo text (workspace name — Frappe controlled, we style only) */
 .sidebar-header .header-title,
 .sidebar-header .sidebar-item-label.header-title {{
     color: {ltc} !important;
     font-size: {lts}px !important;
     font-weight: 700 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
 }}
 
+/* Logo subtitle (username — Frappe controlled, we style only) */
 .sidebar-header .header-subtitle,
 .sidebar-header .sidebar-item-label.header-subtitle {{
     color: {lsc} !important;
     font-size: {lss}px !important;
     font-weight: 400 !important;
+}}
+
+/* Dropdown chevron */
+.sidebar-header .drop-icon,
+.sidebar-header .drop-icon svg {{
+    color: {chev} !important;
+    stroke: {chev} !important;
+    display: {show_chevron} !important;
 }}
 
 .sidebar-header .icon.icon-sm,
@@ -373,10 +401,15 @@ def _build_sidebar_css(s):
 
 
 /* ── 5. MENU ITEMS — HOVER ───────────────────────────────── */
-/* Frappe's desk.bundle.css uses --sidebar-hover-color for hover bg.
-   Override that variable so only ONE hover rule fires, not two. */
-.body-sidebar {{
+/* Frappe collapses the sidebar to width:50px with no extra class.
+   We override --sidebar-hover-color on the expanded parent container
+   and reset it to transparent when collapsed (data-sidebar=0 on body). */
+body[data-sidebar="1"] .body-sidebar {{
     --sidebar-hover-color: {hBg} !important;
+}}
+
+body[data-sidebar="0"] .body-sidebar {{
+    --sidebar-hover-color: transparent !important;
 }}
 
 .body-sidebar .standard-sidebar-item:not(.active-sidebar-item):has(a:not(.section-break)):hover .sidebar-item-label {{
@@ -395,9 +428,9 @@ def _build_sidebar_css(s):
 
 
 /* ── 6. MENU ITEMS — ACTIVE ──────────────────────────────── */
-/* .portal-active is added by load_theme.js on every route change
-   since Frappe v16 never adds its own active class to sidebar items */
-.body-sidebar .sidebar-item-container.portal-active > .standard-sidebar-item > .item-anchor {{
+/* Frappe v16 adds .active-sidebar to .standard-sidebar-item
+   when the item is the current page */
+.body-sidebar .standard-sidebar-item.active-sidebar > .item-anchor {{
     background: {aBg} !important;
     color: {aTxt} !important;
     font-weight: {aFW} !important;
@@ -405,18 +438,18 @@ def _build_sidebar_css(s):
     {active_border}
 }}
 
-.body-sidebar .sidebar-item-container.portal-active .sidebar-item-label {{
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-label {{
     color: {aTxt} !important;
 }}
 
-.body-sidebar .sidebar-item-container.portal-active .sidebar-item-icon,
-.body-sidebar .sidebar-item-container.portal-active .sidebar-item-icon svg {{
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon,
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon svg {{
     color: {aIcon} !important;
     stroke: {aIcon} !important;
     display: {show_icons} !important;
 }}
 
-.body-sidebar .sidebar-item-container.portal-active .sidebar-item-icon.text-ink-gray-7 {{
+.body-sidebar .standard-sidebar-item.active-sidebar .sidebar-item-icon.text-ink-gray-7 {{
     --icon-stroke: {aIcon} !important;
 }}
 

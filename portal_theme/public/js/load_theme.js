@@ -2,8 +2,6 @@
  * load_theme.js — Single source of truth for all theme CSS.
  * Calls get_active_theme_css() once, caches the result,
  * and re-injects on every Frappe SPA navigation.
- * Manually marks active sidebar item since Frappe v16
- * does not add any active class to sidebar items.
  */
 
 (function () {
@@ -15,7 +13,6 @@
     frappe.after_ajax(function () {
         fetchAndApply();
         hookRouter();
-        markActiveSidebarItem();
     });
 
     /* ── 1. Fetch (once) and apply ──────────────────────────── */
@@ -24,7 +21,6 @@
             applyCSS(_cssCache);
             return;
         }
-
         frappe.call({
             method: "portal_theme.api.get_active_theme_css",
             callback: function (r) {
@@ -39,44 +35,15 @@
     function hookRouter() {
         $(document).on("page-change", function () {
             if (_cssCache) applyCSS(_cssCache);
-            markActiveSidebarItem();
         });
-
         if (frappe.router) {
             frappe.router.on("change", function () {
                 if (_cssCache) applyCSS(_cssCache);
-                markActiveSidebarItem();
             });
         }
     }
 
-    /* ── 3. Mark active sidebar item ────────────────────────── */
-    function markActiveSidebarItem() {
-        setTimeout(function () {
-            // Remove previous active marks
-            document.querySelectorAll('.sidebar-item-container.portal-active')
-                .forEach(function(el) { el.classList.remove('portal-active'); });
-
-            var route = frappe.get_route_str() || "";
-            // e.g. "List/Font/List" → doctype = "Font"
-            // e.g. "Form/Sidebar Theme/Sidebar Theme" → doctype = "Sidebar Theme"
-            var parts = route.split("/");
-            var doctype = (parts[1] || "").toLowerCase().replace(/ /g, "-");
-
-            if (!doctype) return;
-
-            document.querySelectorAll('.sidebar-item-container').forEach(function (el) {
-                var itemName = (el.getAttribute('item-name') || "").toLowerCase().replace(/ /g, "-");
-                var href = (el.querySelector('.item-anchor')?.getAttribute('href') || "").toLowerCase();
-
-                if (itemName && (itemName === doctype || href.includes("/" + doctype))) {
-                    el.classList.add('portal-active');
-                }
-            });
-        }, 150);
-    }
-
-    /* ── 4. Apply CSS (fonts + styles) ─────────────────────── */
+    /* ── 3. Apply CSS (fonts + styles) ─────────────────────── */
     function applyCSS(css) {
         var importRegex = /@import url\(["']([^"']+)["']\);?/g;
         var match;
@@ -91,7 +58,6 @@
                 document.head.appendChild(link);
             }
         }
-
         var clean = css.replace(/@import url\(["'][^"']+["']\);?/g, "").trim();
         var tag = document.getElementById("dynamic-ui-theme");
         if (!tag) {
