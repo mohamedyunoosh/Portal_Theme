@@ -152,10 +152,10 @@ app_include_js = [
 # 	}
 # }
 doc_events = {
-    "Sidebar Theme": {
+    "Sidebar Settings": {
         "on_update": "portal_theme.api.clear_theme_cache"
     },
-    "Portal Theme Setting": {
+    "Portal Theme Settings": {
         "on_update": "portal_theme.api.clear_theme_cache"
     },
     "Font": {

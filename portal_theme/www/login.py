@@ -52,8 +52,9 @@ def get_context(context):
     context["app_name"] = (
         frappe.get_website_settings("app_name") or frappe.get_system_settings("app_name") or _("Frappe")
     )
-    portal_theme_setting = frappe.get_single("Portal Theme Setting")
-    if portal_theme_setting.enable:
+    pts_name = frappe.db.get_value("Portal Theme Settings", {"enable": 1}, "name")
+    portal_theme_setting = frappe.get_doc("Portal Theme Settings", pts_name) if pts_name else None
+    if portal_theme_setting and portal_theme_setting.enable:
         if portal_theme_setting.apply_on_login_page:
             context["background_image"] = portal_theme_setting.background_image
             context["background_opacity"] = portal_theme_setting.background_opacity
