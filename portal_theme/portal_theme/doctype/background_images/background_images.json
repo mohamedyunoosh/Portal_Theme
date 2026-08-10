@@ -1,18 +1,24 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2025-10-02 00:02:04.579608",
+ "autoname": "Image",
+ "creation": "2026-05-22 12:34:30.171326",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+  "upload_image_section",
   "image"
  ],
  "fields": [
   {
+   "fieldname": "upload_image_section",
+   "fieldtype": "Section Break",
+   "label": "Upload Image"
+  },
+  {
    "fieldname": "image",
-   "fieldtype": "Attach",
-   "in_list_view": 1,
+   "fieldtype": "Attach Image",
    "label": "Image"
   }
  ],
@@ -20,14 +26,16 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-10-02 00:04:50.093172",
+ "modified": "2026-05-23 14:05:41.554741",
  "modified_by": "Administrator",
  "module": "Portal Theme",
  "name": "Background Images",
+ "naming_rule": "Set by user",
  "owner": "Administrator",
  "permissions": [],
  "row_format": "Dynamic",
- "sort_field": "modified",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "creation",
  "sort_order": "DESC",
  "states": []
 }

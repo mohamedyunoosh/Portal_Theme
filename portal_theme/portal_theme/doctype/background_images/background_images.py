@@ -1,4 +1,4 @@
-# Copyright (c) 2025, Sudhanshu Badole and contributors
+# Copyright (c) 2026, Sudhanshu Badole and contributors
 # For license information, please see license.txt
 
 # import frappe

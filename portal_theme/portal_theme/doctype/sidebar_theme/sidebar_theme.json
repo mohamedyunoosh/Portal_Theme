@@ -1,21 +1,17 @@
 {
  "actions": [],
  "allow_rename": 1,
- "creation": "2026-04-25 11:00:00.000000",
+ "creation": "2026-04-25 11:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "general_tab",
   "enable_sidebar_theme",
-  "column_break_gen1",
-  "sidebar_width",
+  "font_weight_section",
   "column_break_gen2",
   "sidebar_font_family",
-  "column_break_gen3",
-  "sidebar_font_size",
-  "font_weight_section",
+  "column_break_awvl",
   "sidebar_font_weight",
-
   "background_tab",
   "bg_section",
   "use_gradient",
@@ -25,12 +21,8 @@
   "bg_gradient_end",
   "column_break_bg2",
   "bg_gradient_direction",
-
   "logo_tab",
   "logo_section",
-  "logo_image",
-  "logo_text",
-  "logo_subtitle",
   "column_break_logo1",
   "logo_bg_color",
   "logo_text_color",
@@ -47,27 +39,12 @@
   "show_dropdown_chevron",
   "column_break_logo_icon2",
   "dropdown_chevron_color",
-
   "search_tab",
   "search_section",
-  "search_bg_color",
-  "search_text_color",
-  "search_placeholder_text",
-  "column_break_search1",
-  "search_border_color",
-  "search_border_radius",
-  "search_icon_color",
-  "column_break_search2",
-  "search_shortcut_text",
   "search_shortcut_bg",
   "search_shortcut_text_color",
-  "search_padding_section",
-  "search_padding",
-  "column_break_search3",
-  "search_focus_border_color",
-  "search_box_shadow",
-  "search_hover_box_shadow",
-
+  "column_break_search1",
+  "search_border_radius",
   "menu_tab",
   "menu_section",
   "item_text_color",
@@ -97,15 +74,12 @@
   "column_break_hover1",
   "hover_icon_color",
   "hover_transition",
-
-  "notification_tab",
   "notification_section",
   "notification_text_color",
   "notification_icon_color",
   "column_break_notif1",
   "notification_badge_bg",
   "notification_badge_text",
-
   "border_tab",
   "border_section",
   "sidebar_border_right_color",
@@ -115,7 +89,6 @@
   "divider_width",
   "column_break_border2",
   "show_dividers",
-
   "scrollbar_tab",
   "scrollbar_section",
   "scrollbar_color",
@@ -137,34 +110,14 @@
    "label": "Enable Sidebar Theme"
   },
   {
-   "fieldname": "column_break_gen1",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "220",
-   "fieldname": "sidebar_width",
-   "fieldtype": "Int",
-   "label": "Sidebar Width (px)"
-  },
-  {
    "fieldname": "column_break_gen2",
    "fieldtype": "Column Break"
   },
   {
-   "default": "Inter, -apple-system, BlinkMacSystemFont, sans-serif",
    "fieldname": "sidebar_font_family",
-   "fieldtype": "Data",
-   "label": "Font Family"
-  },
-  {
-   "fieldname": "column_break_gen3",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "13",
-   "fieldname": "sidebar_font_size",
-   "fieldtype": "Int",
-   "label": "Font Size (px)"
+   "fieldtype": "Link",
+   "label": "Font",
+   "options": "Font"
   },
   {
    "fieldname": "font_weight_section",
@@ -176,7 +129,6 @@
    "fieldtype": "Data",
    "label": "Font Weight"
   },
-
   {
    "fieldname": "background_tab",
    "fieldtype": "Tab Break",
@@ -195,10 +147,10 @@
   },
   {
    "default": "#0a0e2a",
+   "depends_on": "eval:!doc.use_gradient",
    "fieldname": "bg_color",
    "fieldtype": "Color",
-   "label": "Background Color",
-   "depends_on": "eval:!doc.use_gradient"
+   "label": "Background Color"
   },
   {
    "fieldname": "column_break_bg1",
@@ -206,17 +158,17 @@
   },
   {
    "default": "#0a0e2a",
+   "depends_on": "eval:doc.use_gradient",
    "fieldname": "bg_gradient_start",
    "fieldtype": "Color",
-   "label": "Gradient Start Color",
-   "depends_on": "eval:doc.use_gradient"
+   "label": "Gradient Start Color"
   },
   {
    "default": "#141a3a",
+   "depends_on": "eval:doc.use_gradient",
    "fieldname": "bg_gradient_end",
    "fieldtype": "Color",
-   "label": "Gradient End Color",
-   "depends_on": "eval:doc.use_gradient"
+   "label": "Gradient End Color"
   },
   {
    "fieldname": "column_break_bg2",
@@ -224,13 +176,12 @@
   },
   {
    "default": "to bottom",
+   "depends_on": "eval:doc.use_gradient",
    "fieldname": "bg_gradient_direction",
    "fieldtype": "Select",
    "label": "Gradient Direction",
-   "options": "to bottom\nto top\nto right\nto left\nto bottom right\nto bottom left\nto top right\nto top left",
-   "depends_on": "eval:doc.use_gradient"
+   "options": "to bottom\nto top\nto right\nto left\nto bottom right\nto bottom left\nto top right\nto top left"
   },
-
   {
    "fieldname": "logo_tab",
    "fieldtype": "Tab Break",
@@ -239,24 +190,7 @@
   {
    "fieldname": "logo_section",
    "fieldtype": "Section Break",
-   "label": "Logo & Branding"
-  },
-  {
-   "fieldname": "logo_image",
-   "fieldtype": "Attach Image",
-   "label": "Logo Image"
-  },
-  {
-   "default": "CRM",
-   "fieldname": "logo_text",
-   "fieldtype": "Data",
-   "label": "Logo Text"
-  },
-  {
-   "default": "SBOSS",
-   "fieldname": "logo_subtitle",
-   "fieldtype": "Data",
-   "label": "Logo Subtitle"
+   "label": "Logo Section"
   },
   {
    "fieldname": "column_break_logo1",
@@ -344,66 +278,25 @@
    "fieldtype": "Color",
    "label": "Dropdown Chevron Color"
   },
-
   {
    "fieldname": "search_tab",
    "fieldtype": "Tab Break",
-   "label": "Search Bar"
+   "label": "Shortcut Badge"
   },
   {
    "fieldname": "search_section",
    "fieldtype": "Section Break",
-   "label": "Search Appearance"
-  },
-  {
-   "default": "#141a3a",
-   "fieldname": "search_bg_color",
-   "fieldtype": "Color",
-   "label": "Search Background"
-  },
-  {
-   "default": "#6c7293",
-   "fieldname": "search_text_color",
-   "fieldtype": "Color",
-   "label": "Search Text Color"
-  },
-  {
-   "default": "Search",
-   "fieldname": "search_placeholder_text",
-   "fieldtype": "Data",
-   "label": "Placeholder Text"
+   "label": "Shortcut Badge Appearance"
   },
   {
    "fieldname": "column_break_search1",
    "fieldtype": "Column Break"
   },
   {
-   "default": "#1a2048",
-   "fieldname": "search_border_color",
-   "fieldtype": "Color",
-   "label": "Search Border Color"
-  },
-  {
    "default": "8",
    "fieldname": "search_border_radius",
    "fieldtype": "Int",
-   "label": "Border Radius (px)"
-  },
-  {
-   "default": "#6c7293",
-   "fieldname": "search_icon_color",
-   "fieldtype": "Color",
-   "label": "Search Icon Color"
-  },
-  {
-   "fieldname": "column_break_search2",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "Ctrl+k",
-   "fieldname": "search_shortcut_text",
-   "fieldtype": "Data",
-   "label": "Shortcut Badge Text"
+   "label": "Shortcut Badge Border Radius (px)"
   },
   {
    "default": "#1a2048",
@@ -417,39 +310,6 @@
    "fieldtype": "Color",
    "label": "Shortcut Badge Text Color"
   },
-  {
-   "fieldname": "search_padding_section",
-   "fieldtype": "Section Break"
-  },
-  {
-   "default": "8px 12px",
-   "fieldname": "search_padding",
-   "fieldtype": "Data",
-   "label": "Search Padding (CSS)"
-  },
-  {
-   "fieldname": "column_break_search3",
-   "fieldtype": "Column Break"
-  },
-  {
-   "default": "#4c6ef5",
-   "fieldname": "search_focus_border_color",
-   "fieldtype": "Color",
-   "label": "Search Focus Border Color"
-  },
-  {
-   "default": "0 0 10px rgba(76, 110, 245, 0.2)",
-   "fieldname": "search_box_shadow",
-   "fieldtype": "Data",
-   "label": "Search Box Shadow (Default)"
-  },
-  {
-   "default": "0 0 15px rgba(76, 110, 245, 0.5)",
-   "fieldname": "search_hover_box_shadow",
-   "fieldtype": "Data",
-   "label": "Search Box Shadow (Hover)"
-  },
-
   {
    "fieldname": "menu_tab",
    "fieldtype": "Tab Break",
@@ -609,12 +469,6 @@
    "fieldtype": "Data",
    "label": "Hover Transition Duration"
   },
-
-  {
-   "fieldname": "notification_tab",
-   "fieldtype": "Tab Break",
-   "label": "Notifications"
-  },
   {
    "fieldname": "notification_section",
    "fieldtype": "Section Break",
@@ -648,7 +502,6 @@
    "fieldtype": "Color",
    "label": "Badge Text Color"
   },
-
   {
    "fieldname": "border_tab",
    "fieldtype": "Tab Break",
@@ -697,7 +550,6 @@
    "fieldtype": "Check",
    "label": "Show Section Dividers"
   },
-
   {
    "fieldname": "scrollbar_tab",
    "fieldtype": "Tab Break",
@@ -735,13 +587,17 @@
    "fieldname": "scrollbar_border_radius",
    "fieldtype": "Int",
    "label": "Scrollbar Border Radius (px)"
+  },
+  {
+   "fieldname": "column_break_awvl",
+   "fieldtype": "Column Break"
   }
  ],
  "hide_toolbar": 1,
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2026-04-25 11:00:00.000000",
+ "modified": "2026-06-01 10:54:54.953822",
  "modified_by": "Administrator",
  "module": "Portal Theme",
  "name": "Sidebar Theme",

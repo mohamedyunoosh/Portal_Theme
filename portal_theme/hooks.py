@@ -31,8 +31,8 @@ app_license = "mit"
 app_include_js = [
     "/assets/portal_theme/js/portal_theme.js",
     "/assets/portal_theme/js/load_theme.js",
-    "/assets/portal_theme/js/portal_sidebar_theme.js",
-    "/assets/portal_theme/js/sidebar_theme_apply.js"
+    "/assets/portal_theme/js/font_form.js"
+
 ]
 
 # include js, css files in header of web template
@@ -151,7 +151,20 @@ app_include_js = [
 # 		"on_trash": "method"
 # 	}
 # }
-
+doc_events = {
+    "Sidebar Settings": {
+        "on_update": "portal_theme.api.clear_theme_cache"
+    },
+    "Portal Theme Settings": {
+        "on_update": "portal_theme.api.clear_theme_cache"
+    },
+    "Font": {
+        "on_update": "portal_theme.api.clear_theme_cache"
+    },
+    "Portal Sidebar Theme": {
+        "on_update": "portal_theme.api.clear_theme_cache"
+    },
+}
 # Scheduled Tasks
 # ---------------
 
